@@ -1,6 +1,6 @@
-const firebase = require("../../utils/firebaseConfig");
+const firebase = require("../../utils/firebase");
 const { db } = require("../../utils/admin");
-const isEmptyOrWhitespace = require("../../utils/validation");
+const { validateData } = require("../../utils/validation");
 
 const SignUp = (request, response) => {
   // schema for user registration
@@ -13,23 +13,8 @@ const SignUp = (request, response) => {
 
   // Validation of inputs, no empty, no whitespaces, password must be match and confirmed
   // Email validation is made by firebase
-  const errors = {};
-  if (
-    isEmptyOrWhitespace(userSchema.password) ||
-    isEmptyOrWhitespace(userSchema.confirmPassword)
-  ) {
-    errors.password = "Password cannot be empty.";
-  }
-  if (userSchema.password !== userSchema.confirmPassword) {
-    errors.confirmPassword = "Passwords do not match.";
-  }
-  if (isEmptyOrWhitespace(userSchema.handle)) {
-    errors.handle = "Handle cannot be empty";
-  }
-  // When there are errors, return error messages
-  if (Object.keys(errors).length !== 0) {
-    return response.status(400).json(errors);
-  }
+  const { errors, valid } = validateData(userSchema);
+  if (!valid) return response.status(400).json(errors);
 
   // Variables used later
   let userId;
@@ -51,7 +36,6 @@ const SignUp = (request, response) => {
           );
       }
     })
-    //
     // Return a Json Web Token to identify the user to firebase services
     // Return the current token if not expired
     .then(createdUser => {
