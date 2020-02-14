@@ -1,12 +1,14 @@
 const app = require("express")();
 const functions = require("firebase-functions");
-const SignUp = require("./db/users/SignUp");
-const SignIn = require("./db/users/SignIn");
+const SignUp = require("./db/users/signUp");
+const SignIn = require("./db/users/signIn");
+const uploadProfilePicture = require("./db/users/uploadProfilePicture");
 const addPost = require("./db/posts/addPost");
 const getPosts = require("./db/posts/getPosts");
 const Auth = require("./middlewares/auth")
 
-// users: Registration, LoginIn, Authentication
+// users: Registration, LoginIn, Authentication, Upload Profile Picture,
+
 /**
  * User registration with validation and Json web token
  * user schema: {email, password, confirmPassword, handle}
@@ -21,7 +23,13 @@ app.post("/SignUp", SignUp);
  */
 app.post("/SignIn", SignIn);
 
+/**
+ * Endpoint for uploading the profile picture
+ */
+app.post("/uploadProfilePicture", Auth, uploadProfilePicture)
+
 // posts: Get all posts and add one post
+
 /**
  * Endpoint for adding posts using the firestore ADD function.
  * Schema for added posts = {message, userHandle, time}

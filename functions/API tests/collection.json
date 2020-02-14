@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "57301813-435f-4cba-af2b-465e8e903c9d",
+		"name": "socialmedia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://europe-west1-sirenesongapp.cloudfunctions.net/api/getPosts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://europe-west1-sirenesongapp.cloudfunctions.net/api/getPosts",
+					"protocol": "https",
+					"host": [
+						"europe-west1-sirenesongapp",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"getPosts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://europe-west1-sirenesongapp.cloudfunctions.net/api/signin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"pls@test.com\",\n\t\"password\": \"test123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://europe-west1-sirenesongapp.cloudfunctions.net/api/signin",
+					"protocol": "https",
+					"host": [
+						"europe-west1-sirenesongapp",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://europe-west1-sirenesongapp.cloudfunctions.net/api/SignUp",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"pls1@test.com\",\n\t\"password\": \"test123\"\n\t\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://europe-west1-sirenesongapp.cloudfunctions.net/api/Signin",
+					"protocol": "https",
+					"host": [
+						"europe-west1-sirenesongapp",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"Signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://europe-west1-sirenesongapp.cloudfunctions.net/api/addPost",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjYzZTllYThmNzNkZWExMTRkZWI5YTY0OTcxZDJhMjkzN2QwYzY3YWEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vc2lyZW5lc29uZ2FwcCIsImF1ZCI6InNpcmVuZXNvbmdhcHAiLCJhdXRoX3RpbWUiOjE1ODE0NjYwNzEsInVzZXJfaWQiOiJtaTZxVlpPVjVEZlJQYjRnaVc1SGFkUDFHb3MyIiwic3ViIjoibWk2cVZaT1Y1RGZSUGI0Z2lXNUhhZFAxR29zMiIsImlhdCI6MTU4MTQ2NjA3MSwiZXhwIjoxNTgxNDY5NjcxLCJlbWFpbCI6InBsczFAdGVzdC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsicGxzMUB0ZXN0LmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.VJd-W9JjIWrxiRaBI1PpKqi8s7MWEwxQ2tcM5huQ1ViSxSLhZCzYW5dcXsRBjvCeZDm2EIS9GAy4DkIefNxofbt7uhbZHNxGvTajOtCesf3OQYx4LshHxuK1ITCe5aivATDNHy3sAMms8BgZghX_7-iS0sLLDb0yM-kUgyufjt_YSzPNttg9h5C-mZF822sd7ZoLVjpcV1Br4nqkjLxNS4aCCIb7_9WSVCmFDRzpjfa6LygaGUHgAqKeeur93TfcyKt0gwaAyAAEI_gfS6Emw-q6L4R0TvM8SUykN5rU5szeA9BTFo5cHOyrKLqAYal9Cp1IYCsoW3-VJ8aPS4LdzA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"message\": \"lul\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://europe-west1-sirenesongapp.cloudfunctions.net/api/addPost",
+					"protocol": "https",
+					"host": [
+						"europe-west1-sirenesongapp",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"addPost"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

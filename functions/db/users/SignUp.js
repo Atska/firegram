@@ -1,4 +1,5 @@
 const firebase = require("../../utils/firebase");
+const firebaseConfig = require("../../utils/firebaseConfig");
 const { db } = require("../../utils/admin");
 const { validateData } = require("../../utils/validation");
 
@@ -19,6 +20,9 @@ const SignUp = (request, response) => {
   // Variables used later
   let userId;
   let token;
+  // Give new user a default image
+  const photoURL = "default.png";
+
   // Traverse the db-document
   db.doc(`/Users/${userSchema.handle}`)
     .get()
@@ -50,6 +54,7 @@ const SignUp = (request, response) => {
         userId,
         email: userSchema.email,
         handle: userSchema.handle,
+        photoURL: `https://firebasestorage.googleapis.com/v0/b/${firebaseConfig.storageBucket}/o/${photoURL}?alt=media`,
         time: new Date().toISOString()
       };
       return db.doc(`/Users/${userSchema.handle}`).set(userInfo);
