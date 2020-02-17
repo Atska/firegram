@@ -1,7 +1,9 @@
 const firebase = require("../../utils/firebase");
 const firebaseConfig = require("../../utils/firebaseConfig");
 const { db } = require("../../utils/admin");
-const { validateData } = require("../../utils/validation");
+const {
+  validateSignUpData
+} = require("../../utils/validations/validateSignUpData");
 
 const SignUp = (request, response) => {
   // schema for user registration
@@ -14,7 +16,7 @@ const SignUp = (request, response) => {
 
   // Validation of inputs, no empty, no whitespaces, password must be match and confirmed
   // Email validation is made by firebase
-  const { errors, valid } = validateData(userSchema);
+  const { errors, valid } = validateSignUpData(userSchema);
   if (!valid) return response.status(400).json(errors);
 
   // Variables used later

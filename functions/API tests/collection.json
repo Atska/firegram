@@ -6,28 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "https://europe-west1-sirenesongapp.cloudfunctions.net/api/getPosts",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://europe-west1-sirenesongapp.cloudfunctions.net/api/getPosts",
-					"protocol": "https",
-					"host": [
-						"europe-west1-sirenesongapp",
-						"cloudfunctions",
-						"net"
-					],
-					"path": [
-						"api",
-						"getPosts"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "https://europe-west1-sirenesongapp.cloudfunctions.net/api/signin",
+			"name": "https://europe-west1-sirenesongapp.cloudfunctions.net/api/signIn",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -64,6 +43,27 @@
 			"response": []
 		},
 		{
+			"name": "https://europe-west1-sirenesongapp.cloudfunctions.net/api/posts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://europe-west1-sirenesongapp.cloudfunctions.net/api/getPosts",
+					"protocol": "https",
+					"host": [
+						"europe-west1-sirenesongapp",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"getPosts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "https://europe-west1-sirenesongapp.cloudfunctions.net/api/SignUp",
 			"request": {
 				"method": "POST",
@@ -77,7 +77,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"email\": \"pls1@test.com\",\n\t\"password\": \"test123\"\n\t\n}",
+					"raw": "{\n\t\"email\": \"pls1@test.com\",\n\t\"password\": \"test123\",\n\t\"confirmPassword\": \"test123\",\n\t\"handle\":\"Testplot\"\n\t\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -85,7 +85,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://europe-west1-sirenesongapp.cloudfunctions.net/api/Signin",
+					"raw": "https://europe-west1-sirenesongapp.cloudfunctions.net/api/signUp",
 					"protocol": "https",
 					"host": [
 						"europe-west1-sirenesongapp",
@@ -94,7 +94,95 @@
 					],
 					"path": [
 						"api",
-						"Signin"
+						"signUp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/sirenesongapp/europe-west1/api/uploadProfilePicture",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjYzZTllYThmNzNkZWExMTRkZWI5YTY0OTcxZDJhMjkzN2QwYzY3YWEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vc2lyZW5lc29uZ2FwcCIsImF1ZCI6InNpcmVuZXNvbmdhcHAiLCJhdXRoX3RpbWUiOjE1ODE3MTMwMzAsInVzZXJfaWQiOiJNY1I1c0NKWDl5ZE9OZUhZNXpkQjUwN0dMSWoyIiwic3ViIjoiTWNSNXNDSlg5eWRPTmVIWTV6ZEI1MDdHTElqMiIsImlhdCI6MTU4MTcxMzAzMCwiZXhwIjoxNTgxNzE2NjMwLCJlbWFpbCI6ImFhY2hlbkB0ZXN0LmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJhYWNoZW5AdGVzdC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.cc78TTW4j-dGQW67mjOVlMqZ6vzcLBKxTSiJM0FTW5lIU8i3L7tQXLEgr0-skmUBqb024Ypi3h1miTLnbiIaHrKvNjo5Dwya4n1pD2_Kb7pk8PysuXzKx9ZNJL2IW17-N96sdxgoRMnXVwVwlNN2H9EEteGpFToMTk_izU_YwFeIhIFV-egkm5lLHjnz7EqoycXS-qhCkO0s1pey8JSQN1sp-mHG613mlE7eHQv37EohjCAa9DtJUPIkmgpoZP5eH8jh4oVAOkeIKb69TyK6xwfalMjmCwHTkbovre-qYFnrx_qIJSQDrKEAEzP6q_4R76fevFda6ijFY2WTRWyCgw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/Binh/projects/SocialMedia/spongi-816.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://europe-west1-sirenesongapp.cloudfunctions.net/api/uploadProfilePicture",
+					"protocol": "https",
+					"host": [
+						"europe-west1-sirenesongapp",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"uploadProfilePicture"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://europe-west1-sirenesongapp.cloudfunctions.net/api/user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjYzZTllYThmNzNkZWExMTRkZWI5YTY0OTcxZDJhMjkzN2QwYzY3YWEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vc2lyZW5lc29uZ2FwcCIsImF1ZCI6InNpcmVuZXNvbmdhcHAiLCJhdXRoX3RpbWUiOjE1ODE3MTM4MjMsInVzZXJfaWQiOiJtaTZxVlpPVjVEZlJQYjRnaVc1SGFkUDFHb3MyIiwic3ViIjoibWk2cVZaT1Y1RGZSUGI0Z2lXNUhhZFAxR29zMiIsImlhdCI6MTU4MTcxMzgyMywiZXhwIjoxNTgxNzE3NDIzLCJlbWFpbCI6InBsczFAdGVzdC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsicGxzMUB0ZXN0LmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.tDh1h3qn2VgoiyhgRmWiqoN_i_lfESxuEicyDO2HQdredd4rc3pVr6Et77hU6M03GhP3iK2fcM7NrljDRQ1Wjlfh9Yw9_wv30or1L_Rq-IHkFFc4AVHk_t4770HWhcGTz_2OQmcmKkobeEaRCQQ2AXnBICCbWcl2H42pGj9D3cCz5s1bvJGjp0rdC64omhYa04zxMrK10OfNVomePeY2WHuwo_BkAC8DrtqokER2nCRSpsKW9Kh_DrpAwdEhQH_11FBKRI8--hhlGINqkemOIqBXSfivRkTUwwRVHs3IIClqXluJRpsg0v-K3s9RgZ3t1p4bSa4ZJNtY4wULG6Fm4g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"bio\": \"Biologie\",\n\t\"website\": \"wrapzeit\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://europe-west1-sirenesongapp.cloudfunctions.net/api/user",
+					"protocol": "https",
+					"host": [
+						"europe-west1-sirenesongapp",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"user"
 					]
 				}
 			},
@@ -108,7 +196,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjYzZTllYThmNzNkZWExMTRkZWI5YTY0OTcxZDJhMjkzN2QwYzY3YWEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vc2lyZW5lc29uZ2FwcCIsImF1ZCI6InNpcmVuZXNvbmdhcHAiLCJhdXRoX3RpbWUiOjE1ODE0NjYwNzEsInVzZXJfaWQiOiJtaTZxVlpPVjVEZlJQYjRnaVc1SGFkUDFHb3MyIiwic3ViIjoibWk2cVZaT1Y1RGZSUGI0Z2lXNUhhZFAxR29zMiIsImlhdCI6MTU4MTQ2NjA3MSwiZXhwIjoxNTgxNDY5NjcxLCJlbWFpbCI6InBsczFAdGVzdC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsicGxzMUB0ZXN0LmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.VJd-W9JjIWrxiRaBI1PpKqi8s7MWEwxQ2tcM5huQ1ViSxSLhZCzYW5dcXsRBjvCeZDm2EIS9GAy4DkIefNxofbt7uhbZHNxGvTajOtCesf3OQYx4LshHxuK1ITCe5aivATDNHy3sAMms8BgZghX_7-iS0sLLDb0yM-kUgyufjt_YSzPNttg9h5C-mZF822sd7ZoLVjpcV1Br4nqkjLxNS4aCCIb7_9WSVCmFDRzpjfa6LygaGUHgAqKeeur93TfcyKt0gwaAyAAEI_gfS6Emw-q6L4R0TvM8SUykN5rU5szeA9BTFo5cHOyrKLqAYal9Cp1IYCsoW3-VJ8aPS4LdzA",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjYzZTllYThmNzNkZWExMTRkZWI5YTY0OTcxZDJhMjkzN2QwYzY3YWEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vc2lyZW5lc29uZ2FwcCIsImF1ZCI6InNpcmVuZXNvbmdhcHAiLCJhdXRoX3RpbWUiOjE1ODE3MTM4MjMsInVzZXJfaWQiOiJtaTZxVlpPVjVEZlJQYjRnaVc1SGFkUDFHb3MyIiwic3ViIjoibWk2cVZaT1Y1RGZSUGI0Z2lXNUhhZFAxR29zMiIsImlhdCI6MTU4MTcxMzgyMywiZXhwIjoxNTgxNzE3NDIzLCJlbWFpbCI6InBsczFAdGVzdC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsicGxzMUB0ZXN0LmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.tDh1h3qn2VgoiyhgRmWiqoN_i_lfESxuEicyDO2HQdredd4rc3pVr6Et77hU6M03GhP3iK2fcM7NrljDRQ1Wjlfh9Yw9_wv30or1L_Rq-IHkFFc4AVHk_t4770HWhcGTz_2OQmcmKkobeEaRCQQ2AXnBICCbWcl2H42pGj9D3cCz5s1bvJGjp0rdC64omhYa04zxMrK10OfNVomePeY2WHuwo_BkAC8DrtqokER2nCRSpsKW9Kh_DrpAwdEhQH_11FBKRI8--hhlGINqkemOIqBXSfivRkTUwwRVHs3IIClqXluJRpsg0v-K3s9RgZ3t1p4bSa4ZJNtY4wULG6Fm4g",
 							"type": "string"
 						}
 					]

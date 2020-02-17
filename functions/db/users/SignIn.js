@@ -1,6 +1,6 @@
 const firebase = require("../../utils/firebase");
 
-const SignIn = async (request, respond) => {
+const signIn = async (request, response) => {
   // User signs in with email and password
   let user = {
     email: request.body.email,
@@ -14,10 +14,10 @@ const SignIn = async (request, respond) => {
     // Fetch the JWT
     const token = await userCredentials.user.getIdToken();
     // Send the JWT
-    return respond.status(200).json({ token });
+    return response.status(200).json({ token });
   } catch (error) {
     return response.status(500).json({ error: error.code });
   }
 };
 
-module.exports = SignIn;
+module.exports = signIn;

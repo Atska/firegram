@@ -62,10 +62,10 @@ const uploadProfilePicture = (request, response) => {
       const photoURL = `https://firebasestorage.googleapis.com/v0/b/${firebaseConfig.storageBucket}/o/${imageFileName}?alt=media`;
       console.log("5");
       console.log(photoURL);
-      // Update our User 
+      // Update our User
       await db.doc(`/Users/${request.user.handle}`).update({ photoURL });
       return response.status(200).json({
-        message: "Image was successfuly uploaded."
+        message: "Image was successfully uploaded."
       });
     } catch (error) {
       console.log(error);

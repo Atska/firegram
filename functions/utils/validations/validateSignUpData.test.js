@@ -1,27 +1,13 @@
 const {
-  validateData,
-  isEmptyOrWhitespace,
+  validateSignUpData,
   validatePassword,
   validateConfirmPassword,
   validateHandle
-} = require("./validation");
+} = require("./validateSignUpData");
 
 let result;
 let expectedResult;
 let data = {};
-let errors = {};
-
-// isEmptyOrWhitespace()
-test("Check if input is empty or contains whitespaces", () => {
-  result = isEmptyOrWhitespace("");
-  expect(result).toBeTruthy();
-  result = isEmptyOrWhitespace(" ");
-  expect(result).toBeTruthy();
-  result = isEmptyOrWhitespace(" Test ");
-  expect(result).toBeTruthy();
-  result = isEmptyOrWhitespace("Test");
-  expect(result).toBeFalsy();
-});
 
 // validatePassword()
 test("Validate password", () => {
@@ -79,13 +65,13 @@ test("Validate handle", () => {
 
 // validateData()
 test("Validate all data", () => {
-  result = validateData(data);
+  result = validateSignUpData(data);
   expect(result).toEqual({ errors: {}, valid: true });
 
   data.password = "";
   data.confirmPassword = "Test";
   data.handle = "";
-  result = validateData(data);
+  result = validateSignUpData(data);
   expectedResult = {
     errors: {
       handle: "Handle cannot be empty",

@@ -1,17 +1,4 @@
-/**
- * Checks if password or handle are invalid by being empty or whitespaces
- * @param {string} string that user enters
- * @returns {Boolean} Returns true if input is either empty or whitespaces
- */
-const isEmptyOrWhitespace = input => {
-  if (input.length === 0 || input.trim() === "") {
-    return true;
-  } else if (input.trim() !== input) {
-    return true;
-  } else {
-    return false;
-  }
-};
+const isEmptyOrWhitespace = require("./isEmptyOrWhitespace");
 
 // Valid and invalid consts for readability
 const VALID = true;
@@ -46,7 +33,7 @@ const validateHandle = data => {
   return setValidResponse(VALID);
 };
 
-const validateData = data => {
+const validateSignUpData = data => {
   let errors = {};
   if (validatePassword(data).error) {
     errors.password = validatePassword(data).error;
@@ -64,8 +51,7 @@ const validateData = data => {
 };
 
 module.exports = {
-  validateData,
-  isEmptyOrWhitespace,
+  validateSignUpData,
   validatePassword,
   validateConfirmPassword,
   validateHandle
