@@ -12,9 +12,14 @@ const addComment = require("./db/posts/addComment")
 const addPost = require("./db/posts/addPost");
 const getOnePost = require("./db/posts/getOnePost");
 const getPosts = require("./db/posts/getPosts");
+const like = require("./db/posts/like");
+const unlike = require("./db/posts/unlike");
 
-
-// users: Registration, LoginIn, Authentication, Upload Profile Picture,
+/**
+ * ==========
+ *   Users
+ * ==========
+ */
 
 /**
  * User registration with validation and Json web token
@@ -45,7 +50,11 @@ app.post("/user", Auth, updateUserProfile);
  */
 app.get("/user", Auth, getUserProfile);
 
-// posts: Get all posts and add one post
+/**
+ * ==========
+ *   POSTS
+ * ==========
+ */
 
 /**
  * Endpoint for adding posts using the firestore ADD function.
@@ -71,6 +80,16 @@ app.get("/post/:postID", getOnePost);
  * Enpoint for commenting a post
  */
 app.post("/post/:postID/comment", Auth, addComment);
+
+/**
+ * Enpoint for liking a post
+ */
+app.post("/post/:postID/like", Auth, like);
+
+/**
+ * Enpoint for unliking a post
+ */
+app.get("/post/:postID/unlike", Auth, unlike);
 
 // Expose Express API as a single Cloud Function:
 exports.api = functions.region("europe-west1").https.onRequest(app);

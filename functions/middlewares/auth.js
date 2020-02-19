@@ -8,8 +8,6 @@ const Auth = async (request, response, next) => {
   // When user logs in he sends a Jason Web Token for us to identify
   // The incoming HTTP request header
   let idToken;
-  console.log("1");
-  console.log(request.headers);
 
   // extract the JWT from Authorization: Bearer {JWT-Code}
   if (
@@ -24,8 +22,7 @@ const Auth = async (request, response, next) => {
   try {
     const decodedToken = await admin.auth().verifyIdToken(idToken);
     request.user = decodedToken;
-    console.log("auth");
-    console.log(request.user);
+
     const result = await db
       .collection("Users")
       .where("userId", "==", request.user.uid)

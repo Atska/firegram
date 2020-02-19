@@ -11,6 +11,7 @@ const signIn = async (request, response) => {
     const userCredentials = await firebase
       .auth()
       .signInWithEmailAndPassword(user.email, user.password);
+
     // Fetch the JWT
     const token = await userCredentials.user.getIdToken();
     // Send the JWT

@@ -6,8 +6,6 @@ const getOnePost = async (request, response) => {
   // and add all the comments of this post to this onePost
   try {
     const getPost = await db.doc(`/Posts/${request.params.postID}`).get();
-    console.log("hi");
-    console.log(request.params);
     if (!getPost.exists) {
       return response
         .status(500)
@@ -15,21 +13,24 @@ const getOnePost = async (request, response) => {
     } else {
       onePost = getPost.data();
       // add an unique id to the posts
-      console.log(9);
       onePost.postId = getPost.id;
       onePost.comments = [];
-      console.log(onePost);
+      onePost.likes = [];
+      console.log(request.params.postID)
       const getComments = await db
         .collection("comments")
         .where("postId", "==", request.params.postID)
         .orderBy("time", "desc")
         .get();
-
-      console.log(10);
-      console.log(getComments);
       getComments.forEach(comment => {
         onePost.comments.push(comment.data());
       });
+      const getLikes = await db.collection("likes").where("postId", "==", request.params.postID).get()
+      getLikes.forEach(like => {
+        onePost.likes.push(like.data())
+      })
+      
+
       return response.status(200).json(onePost);
     }
   } catch (error) {

@@ -19,29 +19,22 @@ const uploadProfilePicture = (request, response) => {
     if (mimetype !== "image/jpeg" && mimetype !== "image/png") {
       return response.status(400).json({ error: "Wrong file type submitted!" });
     }
-    console.log("2");
-    console.log(fieldname);
-    console.log(filename);
-    console.log(mimetype);
+
     // Get the extension (jpeg, png) of any image file => image.png => png
     const imageExtension = filename.split(".")[filename.split(".").length - 1];
     // Rename the filename with a random generated number => image.png => 4535435355.png
     imageFileName = `${Math.round(
       Math.random() * 100000000000
     )}.${imageExtension}`;
-    console.log(imageFileName);
+
     // Creating path
     const filepath = path.join(tmpdir, imageFileName);
-    console.log("3");
-    console.log(filepath);
-
     uploadedImage = { filepath, mimetype };
-    console.log("4");
-    console.log(uploadedImage);
+
     // Streams are a collection of data
     // Allows us to write data to create file => Returns a new writeable stream object
     const writeStream = fs.createWriteStream(filepath);
-    file.pipe(writeStream);
+    return file.pipe(writeStream);
   });
 
   busboy.on("finish", async () => {
@@ -60,8 +53,6 @@ const uploadProfilePicture = (request, response) => {
 
       // without ?alt=media it will download the file instead of showing it to us
       const photoURL = `https://firebasestorage.googleapis.com/v0/b/${firebaseConfig.storageBucket}/o/${imageFileName}?alt=media`;
-      console.log("5");
-      console.log(photoURL);
       // Update our User
       await db.doc(`/Users/${request.user.handle}`).update({ photoURL });
       return response.status(200).json({
