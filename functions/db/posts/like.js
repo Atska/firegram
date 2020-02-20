@@ -12,7 +12,7 @@ const like = async (request, response) => {
     const getPost = await db.doc(`/Posts/${request.params.postID}`).get();
     if (!getPost.exists) {
       return response
-        .status(500)
+        .status(404)
         .json({ error: "Wanted post does not exists." });
     } else {
       onePost = getPost.data();
@@ -32,7 +32,7 @@ const like = async (request, response) => {
         db.collection("likes").add(likeSchema);
         return response.status(200).json({ message: "Successfully liked." });
       } else {
-        return response.status(500).json({ error: "Already liked." });
+        return response.status(404).json({ error: "Already liked." });
       }
     }
   } catch (error) {
