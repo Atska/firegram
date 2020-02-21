@@ -1,7 +1,6 @@
 const { db } = require("../../utils/admin");
 
 const unlike = async (request, response) => {
-  
   try {
     // check whether the post exist
     const getPost = await db.doc(`/Posts/${request.params.postID}`).get();
@@ -20,9 +19,9 @@ const unlike = async (request, response) => {
         .where("postId", "==", request.params.postID)
         .limit(1)
         .get();
-        
+
       if (getLike.empty) {
-        return response.status(500).json({ error: "No like." });
+        return response.status(404).json({ error: "No like." });
       } else {
         db.collection("likes")
           .doc(`${getLike.docs[0].id}`)

@@ -22,7 +22,6 @@ const Auth = async (request, response, next) => {
   try {
     const decodedToken = await admin.auth().verifyIdToken(idToken);
     request.user = decodedToken;
-
     const result = await db
       .collection("Users")
       .where("userId", "==", request.user.uid)

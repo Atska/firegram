@@ -10,8 +10,7 @@ const addComment = async (request, response) => {
   };
   try {
     const getPost = await db.doc(`/Posts/${request.params.postID}`).get();
-    console.log("addcomment");
-    console.log(request.params);
+    
     if (!getPost.exists) {
       return response
         .status(500)

@@ -7,8 +7,11 @@ const signIn = require("./db/users/signIn");
 const updateUserProfile = require("./db/users/updateUserProfile");
 const getUserProfile = require("./db/users/getUserProfile");
 const uploadProfilePicture = require("./db/users/uploadProfilePicture");
+const getOtherUserProfile = require("./db/users/getOtherUserProfile");
+const follow = require("./db/users/follow");
+const unfollow = require("./db/users/unfollow");
 // posts
-const addComment = require("./db/posts/addComment")
+const addComment = require("./db/posts/addComment");
 const addPost = require("./db/posts/addPost");
 const getOnePost = require("./db/posts/getOnePost");
 const getPosts = require("./db/posts/getPosts");
@@ -25,7 +28,10 @@ app.post("/signUp", SignUp);
 app.post("/signIn", signIn);
 app.post("/uploadProfilePicture", Auth, uploadProfilePicture);
 app.post("/user", Auth, updateUserProfile);
+app.post("/user/:userHandle/follow", Auth, follow);
+app.post("/user/:userHandle/unfollow", Auth, unfollow);
 app.get("/user", Auth, getUserProfile);
+app.get("/user/:userHandle", Auth, getOtherUserProfile);
 
 /**
  * ==========
@@ -33,15 +39,17 @@ app.get("/user", Auth, getUserProfile);
  * ==========
  */
 app.post("/addPost", Auth, addPost);
-app.get("/posts", getPosts);
-app.get("/post/:postID", getOnePost);
-app.delete("/post/:postID", Auth, deleteOnePost)
 app.post("/post/:postID/comment", Auth, addComment);
 app.post("/post/:postID/like", Auth, like);
+app.get("/posts", getPosts);
+app.get("/post/:postID", getOnePost);
 app.get("/post/:postID/unlike", Auth, unlike);
+app.delete("/post/:postID", Auth, deleteOnePost);
 
 // Expose Express API as a single Cloud Function:
 exports.api = functions.region("europe-west1").https.onRequest(app);
+
+
 
 // https://firebase.google.com/docs/functions/get-started
 // https://firebase.google.com/docs/reference/admin/node

@@ -4,9 +4,6 @@ const deleteOnePost = async (request, response) => {
   try {
     const doc = db.doc(`/Posts/${request.params.postID}`);
     const getPost = await doc.get();
-    console.log(getPost.data().handle);
-    console.log(getPost.data());
-    console.log(request.params.postID);
 
     if (!getPost.exists) {
       return response

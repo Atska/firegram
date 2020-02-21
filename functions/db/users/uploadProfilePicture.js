@@ -27,7 +27,6 @@ const uploadProfilePicture = (request, response) => {
       Math.random() * 100000000000
     )}.${imageExtension}`;
 
-    // Creating path
     const filepath = path.join(tmpdir, imageFileName);
     uploadedImage = { filepath, mimetype };
 

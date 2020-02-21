@@ -8,7 +8,7 @@ const getOnePost = async (request, response) => {
     const getPost = await db.doc(`/Posts/${request.params.postID}`).get();
     if (!getPost.exists) {
       return response
-        .status(500)
+        .status(404)
         .json({ error: "Wanted post does not exists." });
     } else {
       onePost = getPost.data();
@@ -16,7 +16,6 @@ const getOnePost = async (request, response) => {
       onePost.postId = getPost.id;
       onePost.comments = [];
       onePost.likes = [];
-      console.log(request.params.postID)
       const getComments = await db
         .collection("comments")
         .where("postId", "==", request.params.postID)
@@ -25,11 +24,13 @@ const getOnePost = async (request, response) => {
       getComments.forEach(comment => {
         onePost.comments.push(comment.data());
       });
-      const getLikes = await db.collection("likes").where("postId", "==", request.params.postID).get()
+      const getLikes = await db
+        .collection("likes")
+        .where("postId", "==", request.params.postID)
+        .get();
       getLikes.forEach(like => {
-        onePost.likes.push(like.data())
-      })
-      
+        onePost.likes.push(like.data());
+      });
 
       return response.status(200).json(onePost);
     }
