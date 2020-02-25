@@ -14,6 +14,7 @@ const Auth = async (request, response, next) => {
     request.headers.authorization &&
     request.headers.authorization.startsWith("Bearer ")
   ) {
+    // Bearer (inseer random code) | split both into an array and acces token 
     idToken = request.headers.authorization.split("Bearer ")[1];
   } else {
     response.status(403).json({ error: "Unauthorized Access" });

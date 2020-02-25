@@ -8,11 +8,10 @@ const getPosts = async (request, response) => {
       .collection("Posts")
       .orderBy("time", "desc")
       .get();
-    console.log(8)
-    console.log(results)
     const posts = [];
     // result.data() is a json object
     results.forEach(result => {
+      console.log(result.data());
       posts.push({
         postId: result.id,
         message: result.data().message,

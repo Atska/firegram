@@ -18,7 +18,6 @@ const like = async (request, response) => {
       onePost = getPost.data();
       // add an unique id to the posts
       onePost.postId = getPost.id;
-      console.log(onePost)
       // check whether the like exist | limit(1) => returns array
       const getLike = await db
         .collection("likes")
@@ -26,8 +25,6 @@ const like = async (request, response) => {
         .where("postId", "==", request.params.postID)
         .limit(1)
         .get();
-        console.log(getLike)
-        
       if (getLike.empty) {
         db.collection("likes").add(likeSchema);
         return response.status(200).json({ message: "Successfully liked." });
