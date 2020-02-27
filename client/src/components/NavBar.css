@@ -1,0 +1,17 @@
+.NavBar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  width: auto;
+  padding-left: 10%;
+}
+.NavBar-container .NavBar-stylebox {
+  width: 10%;
+  letter-spacing: 5px;
+}
+.NavBar-container .NavBar-title {
+  display: flex;
+  /* margin-left: 30%; */
+}
