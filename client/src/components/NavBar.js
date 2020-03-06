@@ -5,11 +5,20 @@ import Box from "@material-ui/core/Box";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Toolbar from "@material-ui/core/Toolbar";
+import { ThemeProvider } from "@material-ui/core/styles";
+import { createMuiTheme } from "@material-ui/core/styles";
 // Icons
 import HomeIcon from "@material-ui/icons/Home";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import WhatshotTwoToneIcon from "@material-ui/icons/WhatshotTwoTone";
+
+const theme = createMuiTheme({
+  typography: {
+    fontSize: 18,
+    fontWeight: 800
+  }
+});
 
 class NavBar extends Component {
   render() {
@@ -17,14 +26,16 @@ class NavBar extends Component {
       <AppBar position="static">
         <Toolbar className="NavBar-container">
           <Box className="NavBar-stylebox"></Box>
-          <Button
-            startIcon={<WhatshotTwoToneIcon />}
-            color="inherit"
-            className="NavBar-title"
-            component={Link}
-            to="/home">
-            Firegram
-          </Button>
+          <ThemeProvider theme={theme}>
+            <Button
+              startIcon={<WhatshotTwoToneIcon />}
+              color="inherit"
+              className="NavBar-title"
+              component={Link}
+              to="/home">
+              Firegram
+            </Button>
+          </ThemeProvider>
           <Box className="NavBar-btns" color="inherit">
             <Button
               color="inherit"
@@ -41,13 +52,12 @@ class NavBar extends Component {
               Profile
             </Button>
           </Box>
-
           <Button
             color="inherit"
             startIcon={<ExitToAppIcon />}
             className="NavBar-logout"
             component={Link}
-              to="/">
+            to="/">
             Logout
           </Button>
         </Toolbar>

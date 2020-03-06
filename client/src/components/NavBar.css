@@ -8,10 +8,11 @@
   padding-left: 10%;
 }
 .NavBar-container .NavBar-stylebox {
-  width: 10%;
-  letter-spacing: 5px;
+  width: 8%;
 }
 .NavBar-container .NavBar-title {
+  display: inline-flex;
+}
+.NavBar-container .NavBar-btns {
   display: flex;
-  /* margin-left: 30%; */
 }

@@ -1,13 +1,19 @@
 const { db } = require("../../utils/admin");
+const isEmptyOrWhitespace = require("../../utils/validations/isEmptyOrWhitespace");
 
 const addPost = async (request, response) => {
-  // Username and message. Time will be automatically added
+  if (isEmptyOrWhitespace(request.body.message)) {
+    return response.status(400).json({body: "Message cannot be empty."})
+  }
   const postSchema = {
     message: request.body.message,
     handle: request.user.handle,
-    time: new Date().toISOString()
+    time: new Date().toISOString(),
+    photoURL: request.user.photoURL,
+    likes: 0,
+    comments: 0
   };
-  // Using the postSchema, post data into the db
+
   try {
     const reference = await db.collection("Posts").add(postSchema);
     return response

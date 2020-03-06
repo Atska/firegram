@@ -17,7 +17,7 @@ const signIn = async (request, response) => {
     // Send the JWT
     return response.status(200).json({ token });
   } catch (error) {
-    return response.status(500).json({ error: error.code });
+    return response.status(500).json({ error: error.message });
   }
 };
 
