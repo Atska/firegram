@@ -23,8 +23,8 @@ class LoginCard extends Component {
     this.state = {
       email: "",
       password: "",
-      errors: {},
-      redirectToReferrer: false
+      errors: {}
+      // redirectToReferrer: false
     };
     this.props = props;
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -55,8 +55,8 @@ class LoginCard extends Component {
     } else {
       const content = await response.json();
       localStorage.setItem("token", `Bearer ${content.token}`);
-      // this.props.history.push("/home");
-      this.setState({ redirectToReferrer: true });
+      this.props.history.push("/home");
+      // this.setState({ redirectToReferrer: true });
     }
   };
 
@@ -68,14 +68,14 @@ class LoginCard extends Component {
 
   render() {
     const { classes } = this.props;
-    const { errors, redirectToReferrer } = this.state;
-    const { from } = this.props.location.state || {
-      from: { pathname: "/home" }
-    };
+    const { errors} = this.state;
+    // const { from } = this.props.location.state || {
+    //   from: { pathname: "/home" }
+    // };
 
-    if (redirectToReferrer === true) {
-      return <Redirect to={from} />;
-    }
+    // if (redirectToReferrer === true) {
+    //   return <Redirect to={from} />;
+    // }
 
     return (
       <Card className={classes.root}>

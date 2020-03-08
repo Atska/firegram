@@ -19,7 +19,7 @@ const SignUp = async (request, response) => {
   // Email validation is made by firebase
   const { errors, valid } = validateSignUpData(userSchema);
   if (!valid) return response.status(400).json(errors);
-
+  
   try {
     const documentPath = await db.doc(`/Users/${userSchema.handle}`).get();
     if (documentPath.exists) {
@@ -42,8 +42,7 @@ const SignUp = async (request, response) => {
       return response.status(201).json({ token });
     }
   } catch (error) {
-    console.log(error.code);
-    return response.status(500).json({ error: error.code });
+    return response.status(500).json({ error: error });
   }
 };
 

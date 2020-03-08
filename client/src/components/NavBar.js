@@ -57,7 +57,9 @@ class NavBar extends Component {
             startIcon={<ExitToAppIcon />}
             className="NavBar-logout"
             component={Link}
-            to="/">
+            onClick={() => {
+              window.localStorage.removeItem("token");
+            }}>
             Logout
           </Button>
         </Toolbar>

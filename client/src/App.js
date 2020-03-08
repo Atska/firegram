@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import theme from "./utils/theme";
 // import jwtDecode from "jwt-decode";
-import { BrowserRouter as Router, Switch, Route,Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 //routes
 import Home from "./routes/Home";
 import Profile from "./routes/Profile";
@@ -13,29 +13,12 @@ import RegistrationCard from "./components/RegistrationCard";
 //Material UI
 import Box from "@material-ui/core/Box";
 import { ThemeProvider } from "@material-ui/core/styles";
-// Utils
-import authenticated from "./utils/auth"
-// import Auth from "./utils/auth";
 import PrivateRoute from "./utils/PrivateRoute";
 //CSS
 import "./components/NavBar.css";
 import "./App.css";
 
 class App extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     authenticated: false
-  //   };
-  // }
-  // async componentDidMount() {
-  //   const token = await localStorage.token;
-  //   if (token) {
-  //     // UNIX timestamp in ms. * 1000 to tranform in seconds
-  //     this.setState({ authenticated: true });
-  //   }
-  // }
-
   render() {
     return (
       <ThemeProvider theme={theme}>
