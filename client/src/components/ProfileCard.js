@@ -8,52 +8,14 @@ import Card from "@material-ui/core/Card";
 import { withStyles } from "@material-ui/core/styles";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
-import Input from "@material-ui/core/Input";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
-import CircularProgress from "@material-ui/core/CircularProgress";
 // Icon
 import ImageIcon from "@material-ui/icons/Image";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 
 class ProfileCard extends Component {
-  constructor() {
-    super();
-    // throws error otherwise because you cannot destructe undefined
-    this.state = {
-      user: {
-        likes: [],
-        follows: [],
-        followedBy: [],
-        credentials: {
-          handle: "",
-          photoURL: "",
-          bio: ""
-        }
-      }
-    };
-  }
-
-  async componentDidMount() {
-    try {
-      const jwtToken = localStorage.token;
-      const options = {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: jwtToken
-        }
-      };
-      const response = await fetch("/user", options);
-      const data = await response.json();
-      this.setState({ user: data });
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   handleUpdatePicture = async event => {
     event.preventDefault();
     const image = event.target.files[0];
@@ -80,38 +42,32 @@ class ProfileCard extends Component {
     const pictureUpload = document.getElementById("profilePicture");
     pictureUpload.click();
   };
+
   render() {
     // <img className={classes.media} src={photoURL} alt="new" />
     // user: {likes, notifications, follows, followedBy,
     // credentials: {handle, email, photoURL, time, userId}}
     const {
-      user: {
-        likes,
-        notifications,
+      classes,
+      profile: {
         follows,
         followedBy,
-        credentials: { handle, photoURL, bio }
+        credentials: { handle, bio, photoURL }
       }
-    } = this.state;
-    const { classes } = this.props;
-
-    // when picture loads slowly => add loading circle
-    const ProfilePicture = photoURL ? (
-      <CardMedia
-        className={classes.media}
-        component="img"
-        alt="Profile Picture"
-        src={photoURL}
-        title="Profile Picture"
-      />
-    ) : (
-      <CircularProgress />
-    );
+    } = this.props;
 
     return (
       <Card className={classes.root}>
         <CardContent>
-          <Grid>{ProfilePicture}</Grid>
+          <Grid>
+            <CardMedia
+              className={classes.media}
+              component="img"
+              alt="Profile Picture"
+              src={photoURL}
+              title="Profile Picture"
+            />
+          </Grid>
           <Grid>
             <Typography
               className={classes.username}
@@ -152,7 +108,6 @@ class ProfileCard extends Component {
             />
             Edit Picture
           </Button>
-
           <Button size="small" color="primary" startIcon={<AccountBoxIcon />}>
             Edit Account
           </Button>

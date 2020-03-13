@@ -1,0 +1,73 @@
+const {
+      classes,
+      user: {
+        follows,
+        followedBy,
+        credentials: { handle, photoURL, bio }
+      }
+    } = this.props;
+
+    // when picture loads slowly => add loading circle
+    const ProfilePicture = photoURL ? (
+      <CardMedia
+        className={classes.media}
+        component="img"
+        alt="Profile Picture"
+        src={photoURL}
+        title="Profile Picture"
+      />
+    ) : (
+      <CircularProgress />
+    );
+
+    return (
+      <Card className={classes.root}>
+        <CardContent>
+          <Grid>{ProfilePicture}</Grid>
+          <Grid>
+            <Typography
+              className={classes.username}
+              variant="h4"
+              component="h2">
+              @{handle}
+            </Typography>
+          </Grid>
+          <CardActions>
+            <Typography className={classes.abo}>
+              {followedBy.length} Follower | {follows.length} follows
+            </Typography>
+          </CardActions>
+          <Grid>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              className={classes.bio}>
+              {bio} Lizards are a widespread group of squamate reptiles, with
+              over 6,000 species, ranging across all continents except
+              Antarctica
+            </Typography>
+          </Grid>
+        </CardContent>
+        <CardActions>
+          <Button
+            component="label"
+            size="small"
+            type="file"
+            color="primary"
+            startIcon={<ImageIcon />}
+            onChange={this.handleUpdatePicture}>
+            <input
+              type="file"
+              id="profilePicture"
+              style={{ display: "none" }}
+              onClick={this.handleClick}
+            />
+            Edit Picture
+          </Button>
+
+          <Button size="small" color="primary" startIcon={<AccountBoxIcon />}>
+            Edit Account
+          </Button>
+        </CardActions>
+      </Card>
+    );
