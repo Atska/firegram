@@ -19,7 +19,7 @@ const SignUp = async (request, response) => {
   // Email validation is made by firebase
   const { errors, valid } = validateSignUpData(userSchema);
   if (!valid) return response.status(400).json(errors);
-  
+
   try {
     const documentPath = await db.doc(`/Users/${userSchema.handle}`).get();
     if (documentPath.exists) {
@@ -35,7 +35,8 @@ const SignUp = async (request, response) => {
         email: userSchema.email,
         handle: userSchema.handle,
         photoURL: `https://firebasestorage.googleapis.com/v0/b/${firebaseConfig.storageBucket}/o/${photoURL}?alt=media`,
-        time: new Date().toISOString()
+        time: new Date().toISOString(),
+        bio: `Hello, I am ${userSchema.handle}.`
       };
       // creates the database entry of the user
       await db.doc(`/Users/${userSchema.handle}`).set(userInfo);

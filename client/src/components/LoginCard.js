@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 // Utils
-import styles from "../utils/styles";
+import styles from "../utils/LoginRegistrationStyles";
 // Images
 import login from "../static/login.png";
 // Material UI
@@ -15,7 +15,6 @@ import Button from "@material-ui/core/Button";
 import CardMedia from "@material-ui/core/CardMedia";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import { Redirect } from "react-router-dom";
 
 class LoginCard extends Component {
   constructor(props) {
@@ -23,7 +22,7 @@ class LoginCard extends Component {
     this.state = {
       email: "",
       password: "",
-      errors: {}
+      errors: { message: "" }
       // redirectToReferrer: false
     };
     this.props = props;
@@ -51,7 +50,7 @@ class LoginCard extends Component {
     if (response.status === 500) {
       const data = await response.json();
       console.log(data.error);
-      this.setState({ errors: data.error });
+      this.setState({ errors: { message: data.error } });
     } else {
       const content = await response.json();
       localStorage.setItem("token", `Bearer ${content.token}`);
@@ -68,7 +67,7 @@ class LoginCard extends Component {
 
   render() {
     const { classes } = this.props;
-    const { errors} = this.state;
+    const { errors } = this.state;
     // const { from } = this.props.location.state || {
     //   from: { pathname: "/home" }
     // };
@@ -109,8 +108,6 @@ class LoginCard extends Component {
                 type="text"
                 variant="filled"
                 size="small"
-                helperText={errors.message}
-                error={errors.message ? true : false}
                 className={classes.textfields}
                 className={classes.textfields}
                 value={this.state.email}
@@ -124,6 +121,8 @@ class LoginCard extends Component {
                 margin="normal"
                 size="small"
                 variant="filled"
+                helperText={errors.message}
+                error={errors.message ? true : false}
                 className={classes.textfields}
                 value={this.state.password}
                 onChange={this.handleChange}

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import relativeTime from "dayjs/plugin/relativeTime";
+//utils
+import styles from "../utils/PostStyles";
 // Material UI
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
@@ -19,32 +21,6 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import FavoriteTwoToneIcon from "@material-ui/icons/FavoriteTwoTone";
 import dayjs from "dayjs";
 
-const styles = {
-  root: {
-    maxWidth: 500,
-    minWidth: 500,
-    marginBottom: "5%",
-    border: "1"
-  },
-  header: {
-    background: "#FCFCFC",
-    borderBottom: " 1px solid #D7D7D7"
-  },
-  message: {
-    background: "#FFFFFF"
-  },
-  media: {
-    height: 0,
-    paddingTop: "56.25%" // 16:9
-  },
-  comment: {
-    display: "flex",
-    justifyContent: "space-between",
-    background: "#FCFCFC",
-    borderTop: "1px solid #D7D7D7"
-  }
-};
-
 class PostCard extends Component {
   render() {
     //destructering: const classes = this.props.classes
@@ -52,7 +28,6 @@ class PostCard extends Component {
       classes,
       post: { message, handle, time, photoURL, likes, comments }
     } = this.props;
-
     //format ISO-string time to relative time
     dayjs.extend(relativeTime);
 

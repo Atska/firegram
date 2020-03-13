@@ -14,6 +14,7 @@ const uploadProfilePicture = (request, response) => {
   // This object will accumulate all the uploaded files, keyed by their name.
   let uploadedImage = {};
 
+  // unused parameter must be added
   busboy.on("file", (fieldname, file, filename, encoding, mimetype) => {
     // only image files, blocks mp3, text etc.
     if (mimetype !== "image/jpeg" && mimetype !== "image/png") {
@@ -54,6 +55,16 @@ const uploadProfilePicture = (request, response) => {
       const photoURL = `https://firebasestorage.googleapis.com/v0/b/${firebaseConfig.storageBucket}/o/${imageFileName}?alt=media`;
       // Update our User
       await db.doc(`/Users/${request.user.handle}`).update({ photoURL });
+      console.log(request.user.handle);
+      let collection = await db
+        .collection("Posts")
+        .where("handle", "==", request.user.handle)
+        .limit(1)
+        .get();
+      collection.forEach(doc => {
+        doc.ref.update({ photoURL });
+      });
+
       return response.status(200).json({
         message: "Image was successfully uploaded."
       });

@@ -1,8 +1,6 @@
 const { db } = require("../../utils/admin");
-const CollectionQueries = require("./../../utils/queries");
 
 const getOtherUserProfile = async (request, response) => {
-  const CQ = new CollectionQueries();
   let oneUser = {};
   // Additional displayed infomation
   oneUser.posts = [];
@@ -16,14 +14,11 @@ const getOtherUserProfile = async (request, response) => {
       oneUser.credentials = getUser.data();
       // add posts of this user
 
-      const postData = await CQ.getOrderedQuery(
-        "Posts",
-        "handle",
-        "==",
-        request.params.handle,
-        "time",
-        "desc"
-      );
+      const postData = await db
+        .collection("Posts")
+        .where("handle", "==", request.params.handle)
+        .orderBy("time", "desc")
+        .get();
 
       postData.forEach(post => {
         // add the id of the post into the json
@@ -33,12 +28,10 @@ const getOtherUserProfile = async (request, response) => {
       });
 
       // Who auth. User follows
-      const followData = await CQ.getQuery(
-        "follow",
-        "FollowerHandle",
-        "==",
-        request.user.handle
-      );
+      const followData = await db
+        .collection("follow")
+        .where("FollowerHandle", "==", request.user.handle)
+        .get();
 
       followData.forEach(doc => {
         let oneDoc = doc.data();
@@ -46,12 +39,10 @@ const getOtherUserProfile = async (request, response) => {
         oneUser.follows.push(oneDoc);
       });
       // Who follows the auth. User
-      const followedData = await CQ.getQuery(
-        "follow",
-        "FollowedHandle",
-        "==",
-        request.user.handle
-      );
+      const followedData = await db
+        .collection("follow")
+        .where("FollowedHandle", "==", request.user.handle)
+        .get();
 
       followedData.forEach(doc => {
         let oneDoc = doc.data();

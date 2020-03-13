@@ -2,6 +2,7 @@ const app = require("express")();
 const functions = require("firebase-functions");
 const Auth = require("./middlewares/auth");
 const { db } = require("./utils/admin");
+const cors = require("cors");
 // users
 const SignUp = require("./db/users/signUp");
 const signIn = require("./db/users/signIn");
@@ -19,6 +20,8 @@ const getPosts = require("./db/posts/getPosts");
 const like = require("./db/posts/like");
 const unlike = require("./db/posts/unlike");
 const deleteOnePost = require("./db/posts/deleteOnePost");
+
+app.use(cors());
 
 /**
  * ==========
@@ -42,7 +45,7 @@ app.get("/user/:handle", Auth, getOtherUserProfile);
 app.post("/addPost", Auth, addPost);
 app.post("/post/:postID/comment", Auth, addComment);
 app.post("/post/:postID/like", Auth, like);
-app.get("/posts", getPosts);
+app.get("/posts",  getPosts);
 app.get("/post/:postID", getOnePost);
 app.post("/post/:postID/unlike", Auth, unlike);
 app.delete("/post/:postID", Auth, deleteOnePost);

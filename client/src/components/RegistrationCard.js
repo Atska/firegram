@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 // Utils
-import styles from "../utils/styles";
+import styles from "../utils/LoginRegistrationStyles";
 // Images
 import Registration from "../static/Registration.png";
 // Material UI
@@ -86,7 +86,7 @@ class RegistrationCard extends Component {
             }
           />
           <Grid>
-          {/* PICTURE */}
+            {/* PICTURE */}
             <CardMedia
               className={classes.media}
               component="img"

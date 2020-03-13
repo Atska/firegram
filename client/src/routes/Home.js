@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 //components
 import PostCard from "../components/PostCard";
+import MessageCard from "../components/MessageCard";
 //Material UI
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 class Home extends Component {
   constructor(props) {
@@ -24,13 +25,17 @@ class Home extends Component {
   }
 
   render() {
+    // maps over all posts and adds loading circle
     let posts = this.state.posts ? (
       this.state.posts.map(post => {
         return <PostCard post={post} key={post.handle} />;
       })
     ) : (
-      <Paper>Loading all posts..</Paper>
+      <CircularProgress />
     );
+
+    // Box is only displayed when posts are loaded
+    let MessageBox = this.state.posts ? <MessageCard /> : null;
 
     return (
       <Grid
@@ -40,9 +45,7 @@ class Home extends Component {
         justify="center"
         alignItems="center">
         {/* MESSAGE */}
-        <Grid>
-          <Paper elevation={3}>MESSAGE HERE!</Paper>
-        </Grid>
+        <Grid>{MessageBox}</Grid>
         {/* POST ITEMS*/}
         <Grid item xs={"auto"}>
           {posts}

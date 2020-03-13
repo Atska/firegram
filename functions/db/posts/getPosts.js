@@ -3,8 +3,9 @@ const { db } = require("../../utils/admin");
 const getPosts = async (request, response) => {
   // "Posts" is the name of the database (collection in firebase)
   // Get all the data from the noSql db and store them in an array. Return json object
-  const posts = [];
+  let posts = [];
   try {
+    // Query to get User profile picture
     const postResults = await db
       .collection("Posts")
       .orderBy("time", "desc")

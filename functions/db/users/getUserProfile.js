@@ -1,10 +1,8 @@
 const { db } = require("../../utils/admin");
-const CollectionQueries = require("./../../utils/queries");
 
 const getUserProfile = async (request, response) => {
-  const CQ = new CollectionQueries();
   let userData = {};
-  
+
   userData.likes = [];
   userData.notifications = [];
   userData.follows = [];
@@ -17,12 +15,11 @@ const getUserProfile = async (request, response) => {
       // get all info from the user into credetials
       userData.credentials = wantedUser.data();
       // Send all likes from the user into the json
-      const likeData = await CQ.getQuery(
-        "likes",
-        "handle",
-        "==",
-        request.user.handle
-      );
+      const likeData = await db
+        .collection("likes")
+        .where("handle", "==", request.user.handle)
+        .get();
+
       likeData.forEach(doc => {
         // add the id of the like into the json
         let oneDoc = doc.data();
@@ -30,14 +27,12 @@ const getUserProfile = async (request, response) => {
         userData.likes.push(oneDoc);
       });
       // Send all notification to json
-      const notifData = await CQ.getOrderedQuery(
-        "notifications",
-        "recipient",
-        "==",
-        request.user.handle,
-        "time",
-        "desc"
-      );
+      const notifData = await db
+        .collection("notifications")
+        .where("recipient", "==", request.user.handle)
+        .orderBy("time", "desc")
+        .get();
+
       notifData.forEach(doc => {
         // add the id of the notification into the json
         let oneDoc = doc.data();
@@ -45,12 +40,10 @@ const getUserProfile = async (request, response) => {
         userData.notifications.push(oneDoc);
       });
       // Who auth. User follows
-      const followData = await CQ.getQuery(
-        "follow",
-        "FollowerHandle",
-        "==",
-        request.user.handle
-      );
+      const followData = await db
+        .collection("follow")
+        .where("FollowerHandle", "==", request.user.handle)
+        .get();
 
       followData.forEach(doc => {
         let oneDoc = doc.data();
@@ -58,12 +51,10 @@ const getUserProfile = async (request, response) => {
         userData.follows.push(oneDoc);
       });
       // Who follows the auth. User
-      const followedData = await CQ.getQuery(
-        "follow",
-        "FollowedHandle",
-        "==",
-        request.user.handle
-      );
+      const followedData = await db
+        .collection("follow")
+        .where("FollowedHandle", "==", request.user.handle)
+        .get();
 
       followedData.forEach(doc => {
         let oneDoc = doc.data();
