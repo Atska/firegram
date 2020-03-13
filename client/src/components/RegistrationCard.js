@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-// Utils
-import styles from "../utils/LoginRegistrationStyles";
+// Styles
+import styles from "./styles/LoginRegistrationStyles";
 // Images
 import Registration from "../static/Registration.png";
 // Material UI

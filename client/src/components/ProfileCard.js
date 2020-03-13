@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+// Styles
+import styles from "./styles/ProfileStyles";
 // Material UI
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
@@ -14,39 +16,6 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 // Icon
 import ImageIcon from "@material-ui/icons/Image";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
-
-const styles = {
-  root: {
-    maxWidth: "20%",
-    minWidth: "20%"
-  },
-  username: {
-    textAlign: "center",
-    borderTop: "1px solid #D7D7D7",
-    padding: "5%"
-  },
-  content: {
-    display: "flex"
-  },
-  media: {
-    maxWidth: "100%",
-    minWidth: "100%",
-    alignItems: "center"
-  },
-  header: {
-    fontSize: 25,
-    borderBottom: "1px solid #D7D7D7",
-    margin: "normal"
-  },
-  abo: {
-    padding: "0"
-  },
-  button: {
-    maxWidth: "20%",
-    minWidth: "20%",
-    alignItems: "center"
-  }
-};
 
 class ProfileCard extends Component {
   constructor() {

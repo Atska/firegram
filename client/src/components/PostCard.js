@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import relativeTime from "dayjs/plugin/relativeTime";
 //utils
-import styles from "../utils/PostStyles";
+import styles from "./styles/PostStyles";
 // Material UI
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
