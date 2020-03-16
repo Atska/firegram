@@ -30,7 +30,7 @@ class PostCard extends Component {
     } = this.props;
     //format ISO-string time to relative time
     dayjs.extend(relativeTime);
-    console.log(this.props.post)
+
     return (
       <Card className={classes.root}>
         {/* HEADER */}

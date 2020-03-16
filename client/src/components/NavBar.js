@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 // Material UI
 import Box from "@material-ui/core/Box";
+import Tooltip from "@material-ui/core/Tooltip";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -37,20 +38,24 @@ class NavBar extends Component {
             </Button>
           </ThemeProvider>
           <Box className="NavBar-btns" color="inherit">
-            <Button
-              color="inherit"
-              startIcon={<HomeIcon />}
-              component={Link}
-              to="/home">
-              Home
-            </Button>
-            <Button
-              color="inherit"
-              startIcon={<AccountBoxIcon />}
-              component={Link}
-              to="/profile">
-              Profile
-            </Button>
+            <Tooltip title="Home" placement="bottom">
+              <Button
+                color="inherit"
+                startIcon={<HomeIcon />}
+                component={Link}
+                to="/home">
+                Home
+              </Button>
+            </Tooltip>
+            <Tooltip title="Profile" placement="bottom">
+              <Button
+                color="inherit"
+                startIcon={<AccountBoxIcon />}
+                component={Link}
+                to="/profile">
+                Profile
+              </Button>
+            </Tooltip>
           </Box>
           <Button
             color="inherit"

@@ -1,19 +1,21 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import EditAccount from "./EditAccount";
 // Styles
 import styles from "./styles/ProfileStyles";
 // Material UI
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
+import Tooltip from "@material-ui/core/Tooltip";
 import { withStyles } from "@material-ui/core/styles";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
+import Link from '@material-ui/core/Link';
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 // Icon
 import ImageIcon from "@material-ui/icons/Image";
-import AccountBoxIcon from "@material-ui/icons/AccountBox";
 
 class ProfileCard extends Component {
   handleUpdatePicture = async event => {
@@ -31,7 +33,7 @@ class ProfileCard extends Component {
         body: data
       };
       await fetch("/uploadProfilePicture", options);
-      // reloads the window for updating pic
+      // reloads the window for updating pic || warning antipattern!
       window.location.reload();
     } catch (error) {
       console.log(error);
@@ -52,13 +54,14 @@ class ProfileCard extends Component {
       profile: {
         follows,
         followedBy,
-        credentials: { handle, bio, photoURL }
+        credentials: { handle, bio, photoURL, website }
       }
     } = this.props;
 
     return (
       <Card className={classes.root}>
         <CardContent>
+          {/* PROFILE PICTURE */}
           <Grid>
             <CardMedia
               className={classes.media}
@@ -69,48 +72,61 @@ class ProfileCard extends Component {
             />
           </Grid>
           <Grid>
+            {/* USERNAME */}
             <Typography
               className={classes.username}
               variant="h4"
+              color="primary"
               component="h2">
-              @{handle}
+              {handle}
             </Typography>
           </Grid>
-          <CardActions>
-            <Typography className={classes.abo}>
-              {followedBy.length} Follower | {follows.length} follows
+          <Grid>
+            <Typography className={classes.website}>
+              <Link href={website}>
+                {website}
+              </Link>
             </Typography>
-          </CardActions>
+          </Grid>
+          {/* FOLLOWS */}
+          <Grid>
+            <CardActions>
+              <Typography className={classes.abo}>
+                {followedBy.length} Follower | {follows.length} follows
+              </Typography>
+            </CardActions>
+          </Grid>
+          {/* BIOGRAPHY */}
           <Grid>
             <Typography
               variant="body2"
               color="textSecondary"
               className={classes.bio}>
-              {bio} Lizards are a widespread group of squamate reptiles, with
-              over 6,000 species, ranging across all continents except
-              Antarctica
+              {bio}
             </Typography>
           </Grid>
         </CardContent>
-        <CardActions>
-          <Button
-            component="label"
-            size="small"
-            type="file"
-            color="primary"
-            startIcon={<ImageIcon />}
-            onChange={this.handleUpdatePicture}>
-            <input
+        {/* BUTTONS */}
+        <CardActions className={classes.edit}>
+          {/* IMAGE UPLOAD BUTTON */}
+          <Tooltip title="Edit profile picture" placement="bottom">
+            <Button
+              component="label"
+              size="small"
               type="file"
-              id="profilePicture"
-              style={{ display: "none" }}
-              onClick={this.handleClick}
-            />
-            Edit Picture
-          </Button>
-          <Button size="small" color="primary" startIcon={<AccountBoxIcon />}>
-            Edit Account
-          </Button>
+              color="primary"
+              startIcon={<ImageIcon />}
+              onChange={this.handleUpdatePicture}>
+              <input
+                type="file"
+                id="profilePicture"
+                style={{ display: "none" }}
+                onClick={this.handleClick}
+              />
+            </Button>
+          </Tooltip>
+          {/* UPDATE ACCOUNT BUTTON */}
+          <EditAccount bio={bio} website={website} />
         </CardActions>
       </Card>
     );
