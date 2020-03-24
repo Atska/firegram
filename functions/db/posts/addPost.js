@@ -9,9 +9,7 @@ const addPost = async (request, response) => {
     message: request.body.message,
     handle: request.user.handle,
     time: new Date().toISOString(),
-    photoURL: request.user.photoURL,
-    likes: 0,
-    comments: 0
+    photoURL: request.user.photoURL
   };
 
   try {

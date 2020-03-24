@@ -36,7 +36,8 @@ const SignUp = async (request, response) => {
         handle: userSchema.handle,
         photoURL: `https://firebasestorage.googleapis.com/v0/b/${firebaseConfig.storageBucket}/o/${photoURL}?alt=media`,
         time: new Date().toISOString(),
-        bio: `Hello, I am ${userSchema.handle}.`
+        bio: `Hello, I am ${userSchema.handle}.`,
+        website: `https://www.firegram.com/user/${userSchema.handle}`
       };
       // creates the database entry of the user
       await db.doc(`/Users/${userSchema.handle}`).set(userInfo);

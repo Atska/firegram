@@ -22,12 +22,31 @@ import FavoriteTwoToneIcon from "@material-ui/icons/FavoriteTwoTone";
 import dayjs from "dayjs";
 
 class PostCard extends Component {
+  
+  handleLikeClick = async event => {
+    event.preventDefault();
+    const jwtToken = localStorage.token;
+
+    let options = {
+      method: "POST",
+      headers: {
+        Authorization: jwtToken
+      }
+    };
+    const response = await fetch(
+      `/post/${this.props.post.postId}/like`,
+      options
+    );
+    console.log(this.props.post.postId);
+  };
+
   render() {
     //destructering: const classes = this.props.classes
     const {
       classes,
       post: { message, handle, time, photoURL, likes, comments }
     } = this.props;
+
     //format ISO-string time to relative time
     dayjs.extend(relativeTime);
 
@@ -60,12 +79,15 @@ class PostCard extends Component {
         {/* LIKE ICONS */}
         <CardActions>
           <IconButton aria-label="like">
-            <FavoriteTwoToneIcon fontSize="small" />
-            {likes}
+            <FavoriteTwoToneIcon
+              fontSize="small"
+              onClick={this.handleLikeClick}
+            />
+            {likes.length}
           </IconButton>
           <IconButton>
             <CommentTwoToneIcon fontSize="small" />
-            {comments}
+            {comments.length}
           </IconButton>
         </CardActions>
         {/* COMMENT */}

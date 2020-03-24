@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+// import jwt_decode from "jwt-decode";
 // Material UI
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -35,7 +36,6 @@ class EditAccount extends Component {
 
   handleChange = event => {
     this.setState({ [event.target.id]: event.target.value });
-    console.log(event.target.value)
   };
 
   handleSubmit = async event => {
@@ -55,11 +55,8 @@ class EditAccount extends Component {
     };
     try {
       const response = await fetch("/user", options);
-      console.log(response.status);
       if (response.status === 200) {
-        this.setState(
-          this.state
-        );
+        this.setState(this.state);
         this.handleClose();
         // reloads the window for updating pic || warning antipattern!
         window.location.reload();

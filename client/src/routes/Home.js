@@ -15,6 +15,7 @@ class Home extends Component {
     };
   }
   async componentDidMount() {
+    // gets all posts
     try {
       const response = await fetch("/posts");
       const json = await response.json();

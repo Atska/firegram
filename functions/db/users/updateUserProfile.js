@@ -3,15 +3,20 @@ const {
   validateUserProfileData
 } = require("../../utils/validations/validateUserProfileData");
 
-const allowedCharacters = 150;
+const allowedCharacters = 600;
 
 const updateUserProfile = async (request, response) => {
   // request.body.bio and website
+  // request.body.bio and website
   let userProfile = validateUserProfileData(request.body);
   if (userProfile.bio.length >= allowedCharacters) {
-    return response.status(500).json({error: "Bio cannot have more than 150 characters."})
+    return response
+      .status(500)
+      .json({
+        error: `Bio cannot have more than ${allowedCharacters} characters.`
+      });
   }
-  
+
   try {
     await db.doc(`/Users/${request.user.handle}`).update(userProfile);
 
@@ -24,4 +29,4 @@ const updateUserProfile = async (request, response) => {
   }
 };
 
-module.exports = updateUserProfile
+module.exports = updateUserProfile;

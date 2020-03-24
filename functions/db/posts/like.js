@@ -6,7 +6,7 @@ const like = async (request, response) => {
     postId: request.params.postID,
     time: new Date().toISOString()
   };
-
+    
   try {
     // check whether the post exist
     const getPost = await db.doc(`/Posts/${request.params.postID}`).get();

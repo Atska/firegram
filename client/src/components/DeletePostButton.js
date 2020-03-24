@@ -8,7 +8,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 // Icons
 import DeleteIcon from "@material-ui/icons/Delete";
 
-class DeleteButton extends Component {
+class DeletePostButton extends Component {
   constructor() {
     super();
     this.state = {
@@ -19,9 +19,14 @@ class DeleteButton extends Component {
   handleClickOpen = () => {
     this.setState({ open: true });
   };
-  handleSubmit = () => {};
+
   handleClose = () => {
     this.setState({ open: false });
+  };
+
+  handleSubmit = async event => {
+    event.preventDefault();
+    const jwtToken = localStorage.token;
   };
 
   render() {
@@ -47,3 +52,5 @@ class DeleteButton extends Component {
     );
   }
 }
+
+export default DeletePostButton;
