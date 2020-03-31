@@ -9,8 +9,8 @@ import Tooltip from "@material-ui/core/Tooltip";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 class DeletePostButton extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       open: false
     };
@@ -27,6 +27,21 @@ class DeletePostButton extends Component {
   handleSubmit = async event => {
     event.preventDefault();
     const jwtToken = localStorage.token;
+
+    let options = {
+      method: "DELETE",
+      headers: {
+        Authorization: jwtToken
+      }
+    };
+
+    const response = await fetch(`/post/${this.props.postId}`, options);
+    const data = await response.json();
+    console.log(data.message);
+    this.setState({ open: false });
+    if (response.status === 200) {
+      window.location.reload();
+    }
   };
 
   render() {
@@ -34,7 +49,7 @@ class DeletePostButton extends Component {
       <Fragment>
         <Tooltip title="Delete Post" placement="bottom">
           <Button onClick={this.handleClickOpen}>
-            {<DeleteIcon color="secondary" fontSize="medium" />}
+            {<DeleteIcon fontSize="medium" />}
           </Button>
         </Tooltip>
         <Dialog open={this.state.open} onClose={this.handleClose}>

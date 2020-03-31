@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import dayjs from "dayjs";
+import DeletePostButton from "./DeletePostButton";
 import relativeTime from "dayjs/plugin/relativeTime";
 //utils
 import styles from "./styles/PostStyles";
@@ -15,37 +17,60 @@ import IconButton from "@material-ui/core/IconButton";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
+import Tooltip from "@material-ui/core/Tooltip";
 // Icons
 import CommentTwoToneIcon from "@material-ui/icons/CommentTwoTone";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import FavoriteTwoToneIcon from "@material-ui/icons/FavoriteTwoTone";
-import dayjs from "dayjs";
 
 class PostCard extends Component {
-  
-  handleLikeClick = async event => {
-    event.preventDefault();
-    const jwtToken = localStorage.token;
+  constructor(props) {
+    super(props);
+    this.state = {
+      liked: false,
+      likes: this.props.post.likes.length
+    };
+  }
 
+  handleLikeClick = async () => {
+    const jwtToken = localStorage.token;
     let options = {
       method: "POST",
       headers: {
         Authorization: jwtToken
       }
     };
-    const response = await fetch(
-      `/post/${this.props.post.postId}/like`,
-      options
-    );
-    console.log(this.props.post.postId);
+
+    // Like and Unlike Feature
+    try {
+      const response = await fetch(
+        `/post/${this.props.post.postId}/like`,
+        options
+      );
+      const data = await response.json();
+      if (data.message === "Successfully unliked.") {
+        this.setState({
+          likes: this.props.post.likes.length,
+          liked: false
+        });
+      } else if (data.message === "Successfully liked.") {
+        this.setState({
+          likes: this.props.post.likes.length + 1,
+          liked: true
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   render() {
     //destructering: const classes = this.props.classes
     const {
       classes,
-      post: { message, handle, time, photoURL, likes, comments }
+      post: { message, handle, time, photoURL, comments, postId }
     } = this.props;
+
+    const { likes } = this.state;
 
     //format ISO-string time to relative time
     dayjs.extend(relativeTime);
@@ -62,17 +87,13 @@ class PostCard extends Component {
             </Typography>
           }
           subheader={dayjs(time).fromNow()}
-          action={
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
-          }
+          action={<DeletePostButton postId={postId} />}
         />
         {/* PICTURE */}
         <CardMedia></CardMedia>
         {/* MESSAGE */}
         <CardContent className={classes.message}>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography variant="body2" color="textSecondary" >
             {message}
           </Typography>
         </CardContent>
@@ -83,8 +104,9 @@ class PostCard extends Component {
               fontSize="small"
               onClick={this.handleLikeClick}
             />
-            {likes.length}
+            {likes}
           </IconButton>
+          {/* COMMENT ICON */}
           <IconButton>
             <CommentTwoToneIcon fontSize="small" />
             {comments.length}

@@ -12,11 +12,11 @@ import Button from "@material-ui/core/Button";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 
 class EditAccount extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      bio: "",
-      website: "",
+      bio: this.props.bio,
+      website: this.props.website,
       open: false
     };
   }
@@ -56,7 +56,7 @@ class EditAccount extends Component {
     try {
       const response = await fetch("/user", options);
       if (response.status === 200) {
-        this.setState(this.state);
+        this.setState(data);
         this.handleClose();
         // reloads the window for updating pic || warning antipattern!
         window.location.reload();

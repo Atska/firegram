@@ -26,6 +26,7 @@ class NavBar extends Component {
     return (
       <AppBar position="static">
         <Toolbar className="NavBar-container">
+          {/* LOGO AND TITLE */}
           <Box className="NavBar-stylebox"></Box>
           <ThemeProvider theme={theme}>
             <Button
@@ -38,6 +39,7 @@ class NavBar extends Component {
             </Button>
           </ThemeProvider>
           <Box className="NavBar-btns" color="inherit">
+            {/* HOME BUTTON */}
             <Tooltip title="Home" placement="bottom">
               <Button
                 color="inherit"
@@ -47,6 +49,7 @@ class NavBar extends Component {
                 Home
               </Button>
             </Tooltip>
+            {/* PROFILE BUTTON*/}
             <Tooltip title="Profile" placement="bottom">
               <Button
                 color="inherit"
@@ -57,6 +60,7 @@ class NavBar extends Component {
               </Button>
             </Tooltip>
           </Box>
+          {/* LOGOUT */}
           <Button
             color="inherit"
             startIcon={<ExitToAppIcon />}

@@ -34,7 +34,7 @@ class MessageCard extends Component {
   };
 
   handleSubmit = async event => {
-    //prevent defualt!!!!!!!!!!!!
+    event.preventDefault();
     const jwtToken = localStorage.token;
     let data = {
       message: this.state.message
