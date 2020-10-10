@@ -35,23 +35,22 @@ You're sections headers will be used to reference location of destination.
 ---
 ## About
 
-This project is showcasing pathfinding and maze algorithms. At the beginning I was interested in the basics of software engineering and wanted to learn more about algorithms and data structures. At the end I did this fun, challenging, furiously frustrating yet so extremely rewarding project.
+This project is a fullstack application with a backend written with Node.js + Express.js. Firebase, Google´s backend-as-a-service (BaaS) platform for mobile and web apps, was used to implement the authentication and Cloud Firestore serves as the No-SQL databank. The frontend technologies include ReactJS and the design system Material UI.
 
 #### What I learned
-- Algorithmic thinking: Slicing a problem in many different subproblems and solve each of them step by step.
-- Data structures: Queues, stacks, heaps, sets and so on. When to use them and write one on your own if you need it.
-- Graph traversal: Must-know stuff like depth-first-search or breadth-first-search, writing recursive function and its pros and cons.
-- That css is hard.
+- Writing RESTful Web services and working with the standard HTTP Methods
+- Working with JSON data format
 
 [Back To The Top](#firegram)
 
 ---
 ## Technologies
 
-- Javascript ES6
-- ReactJS
-
-Note: This project was developed with Google Chrome and its not optimized for phone usage. It was written with a 27inch monitor and a 14inch" laptop.
+- [Javascript ES6](https://developer.mozilla.org/de/docs/Web/JavaScript)
+- [ReactJS](https://reactjs.org/docs/getting-started.html) - Frontend framework
+- [Node.js](https://nodejs.org/en/) + [Express.js](https://expressjs.com/de/) - Backend runtime + lightweight framework
+- [Material UI](https://material-ui.com/) - design system
+- [Postman](https://www.postman.com/) - Platform for API Development
 
 [Back To The Top](#firegram)
 
