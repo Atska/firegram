@@ -17,7 +17,6 @@ import IconButton from "@material-ui/core/IconButton";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
-import Tooltip from "@material-ui/core/Tooltip";
 // Icons
 import CommentTwoToneIcon from "@material-ui/icons/CommentTwoTone";
 import FavoriteTwoToneIcon from "@material-ui/icons/FavoriteTwoTone";

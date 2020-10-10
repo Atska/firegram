@@ -5,7 +5,7 @@ const {
   validateSignUpData
 } = require("../../utils/validations/validateSignUpData");
 
-const SignUp = async (request, response) => {
+const signUp = async (request, response) => {
   // schema for user registration
   const userSchema = {
     email: request.body.email,
@@ -48,4 +48,4 @@ const SignUp = async (request, response) => {
   }
 };
 
-module.exports = SignUp;
+module.exports = signUp;

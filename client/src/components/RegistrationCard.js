@@ -24,28 +24,28 @@ class RegistrationCard extends Component {
       email: "",
       password: "",
       confirmPassword: "",
-      errors: {}
+      errors: {},
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleSubmit = async event => {
+  handleSubmit = async (event) => {
     event.preventDefault();
 
     let newUser = {
       email: this.state.email,
       handle: this.state.username,
       password: this.state.password,
-      confirmPassword: this.state.confirmPassword
+      confirmPassword: this.state.confirmPassword,
     };
 
     let options = {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(newUser)
+      body: JSON.stringify(newUser),
     };
 
     const response = await fetch("/signUp", options);
@@ -55,20 +55,23 @@ class RegistrationCard extends Component {
       this.props.history.push("/home");
     } else {
       const data = await response.json();
-      this.setState({ errors: data });
+      if (response.status === 500) {
+        this.setState({ errors: data.error });
+      } else {
+        this.setState({ errors: data });
+      }
     }
   };
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
 
   render() {
     const { classes } = this.props;
     const { errors } = this.state;
-
     return (
       <Card className={classes.root}>
         <Grid

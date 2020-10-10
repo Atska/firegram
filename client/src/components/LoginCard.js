@@ -49,13 +49,11 @@ class LoginCard extends Component {
     const response = await fetch("/signIn", options);
     if (response.status === 500) {
       const data = await response.json();
-      console.log(data.error);
       this.setState({ errors: { message: data.error } });
     } else {
       const content = await response.json();
       localStorage.setItem("token", `Bearer ${content.token}`);
       this.props.history.push("/home");
-      // this.setState({ redirectToReferrer: true });
     }
   };
 
@@ -68,13 +66,6 @@ class LoginCard extends Component {
   render() {
     const { classes } = this.props;
     const { errors } = this.state;
-    // const { from } = this.props.location.state || {
-    //   from: { pathname: "/home" }
-    // };
-
-    // if (redirectToReferrer === true) {
-    //   return <Redirect to={from} />;
-    // }
 
     return (
       <Card className={classes.root}>

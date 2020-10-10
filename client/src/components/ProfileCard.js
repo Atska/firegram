@@ -46,9 +46,6 @@ class ProfileCard extends Component {
   };
 
   render() {
-    // <img className={classes.media} src={photoURL} alt="new" />
-    // user: {likes, notifications, follows, followedBy,
-    // credentials: {handle, email, photoURL, time, userId}}
     const {
       classes,
       profile: {

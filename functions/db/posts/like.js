@@ -4,9 +4,9 @@ const like = async (request, response) => {
   likeSchema = {
     handle: request.user.handle,
     postId: request.params.postID,
-    time: new Date().toISOString()
+    time: new Date().toISOString(),
   };
-    
+
   try {
     // check whether the post exist
     const getPost = await db.doc(`/Posts/${request.params.postID}`).get();
@@ -28,8 +28,10 @@ const like = async (request, response) => {
       if (getLike.empty) {
         db.collection("likes").add(likeSchema);
         return response.status(200).json({ message: "Successfully liked." });
-      } else {
-        return response.status(404).json({ error: "Already liked." });
+      } else if (getLike) {
+        // unlike
+        db.collection("likes").doc(`${getLike.docs[0].id}`).delete();
+        return response.status(200).json({ message: "Successfully unliked." });
       }
     }
   } catch (error) {

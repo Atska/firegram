@@ -7,7 +7,6 @@ const allowedCharacters = 600;
 
 const updateUserProfile = async (request, response) => {
   // request.body.bio and website
-  // request.body.bio and website
   let userProfile = validateUserProfileData(request.body);
   if (userProfile.bio.length >= allowedCharacters) {
     return response

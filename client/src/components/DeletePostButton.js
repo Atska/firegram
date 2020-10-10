@@ -37,7 +37,6 @@ class DeletePostButton extends Component {
 
     const response = await fetch(`/post/${this.props.postId}`, options);
     const data = await response.json();
-    console.log(data.message);
     this.setState({ open: false });
     if (response.status === 200) {
       window.location.reload();
