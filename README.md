@@ -19,7 +19,6 @@ Note: You can see the login and registration page right now. Click here for the 
 ## Demo
 
 <details> <summary>Login and Registration</summary>
-  <br></br>
   <ul>
     <li>Login and Registration done with firebase and JSON Web Tokens.</li>
     <li>Validation of the input is done in the backend with the support of firebase.</li>
