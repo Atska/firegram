@@ -1,6 +1,10 @@
 # FIREGRAM
 
 Note: You can see the login and registration page right now. Click here for the [Demo](#demo).
+
+---
+
+
 <img width="900" height="500" src="https://github.com/Atska/firegram/blob/master/gitPictures/Home.jpg"></img>
 
 ---
