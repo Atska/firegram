@@ -18,6 +18,7 @@ Note: You can see the login and registration page right now. Click here for the 
 
 ---
 ## Demo
+To see the Demo click on the elements.
 
 <details> <summary>Login and Registration</summary>
   <ul>
